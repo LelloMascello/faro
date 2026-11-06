@@ -28,6 +28,7 @@ Shows the unread inbox count and previews of the latest messages from an Outlook
 4. Under **Authentication → Advanced settings**, set **Allow public client flows** to **Yes** and click **Save** (required for Device Code Flow).
 5. Under **API permissions → Add a permission → Microsoft Graph → Delegated permissions**, ensure `User.Read`, `Mail.Read`, and `offline_access` are added.
 6. Run the one-time CLI linker:
+
    ```bash
    # Local development
    pnpm faro:auth outlook --account polimi
@@ -35,6 +36,7 @@ Shows the unread inbox count and previews of the latest messages from an Outlook
    # Inside Docker container
    docker exec -it -u 1000 faro node scripts/faro-auth.mjs outlook --account polimi
    ```
+
    Open `https://microsoft.com/devicelogin` in any browser and enter the short code printed in the terminal.
 
 ### Note on University / Organizational Accounts

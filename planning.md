@@ -13,14 +13,11 @@ Obiettivo: aggiungere al fork tre nuovi widget di servizio, `gmail`, `outlook` e
 
 ## Da rivedere
 
-> [!IMPORTANT]
-> **Account Outlook universitario.** Microsoft Graph richiede una _App Registration_ in Entra ID (gratuita, la crei con un account personale). Se il tenant dell'ateneo blocca il consenso utente a `Mail.Read`, al login comparirà "Need admin approval". In quel caso le opzioni sono: chiedere l'approvazione all'IT oppure usare un account personale. **Non** propongo scorciatoie come riusare il client ID di altre app (es. Thunderbird).
+> [!IMPORTANT] > **Account Outlook universitario.** Microsoft Graph richiede una _App Registration_ in Entra ID (gratuita, la crei con un account personale). Se il tenant dell'ateneo blocca il consenso utente a `Mail.Read`, al login comparirà "Need admin approval". In quel caso le opzioni sono: chiedere l'approvazione all'IT oppure usare un account personale. **Non** propongo scorciatoie come riusare il client ID di altre app (es. Thunderbird).
 
-> [!WARNING]
-> **Google, scadenza dei token.** Se l'app OAuth su Google Cloud resta in stato _Testing_, i refresh token scadono **dopo 7 giorni**. Bisogna portarla in _In production_. Non serve la verifica: per uso personale compare solo l'avviso "App non verificata" → _Avanzate → Continua_. Lo spiegherò passo passo nella documentazione.
+> [!WARNING] > **Google, scadenza dei token.** Se l'app OAuth su Google Cloud resta in stato _Testing_, i refresh token scadono **dopo 7 giorni**. Bisogna portarla in _In production_. Non serve la verifica: per uso personale compare solo l'avviso "App non verificata" → _Avanzate → Continua_. Lo spiegherò passo passo nella documentazione.
 
-> [!CAUTION]
-> **Checkbox dei task = permesso di scrittura.** Lo scope `https://www.googleapis.com/auth/tasks` permette di modificare i task. Chi apre la dashboard può segnare task come completati, quindi conviene attivare l'auth di homepage se la dashboard è esposta. C'è un'opzione `completeTasks: false` per disattivarla.
+> [!CAUTION] > **Checkbox dei task = permesso di scrittura.** Lo scope `https://www.googleapis.com/auth/tasks` permette di modificare i task. Chi apre la dashboard può segnare task come completati, quindi conviene attivare l'auth di homepage se la dashboard è esposta. C'è un'opzione `completeTasks: false` per disattivarla.
 
 **Decisioni di design confermate:**
 

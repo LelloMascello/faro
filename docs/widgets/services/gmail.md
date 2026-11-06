@@ -35,6 +35,7 @@ One Google OAuth setup covers both the **Gmail** and **Google Calendar** widgets
 4. Under **Credentials → Create Credentials → OAuth client ID**:
    - Select **Desktop app** and copy the **Client ID** and **Client Secret**.
 5. Run the one-time CLI linker:
+
    ```bash
    # Local development
    pnpm faro:auth google --account personale
@@ -42,6 +43,7 @@ One Google OAuth setup covers both the **Gmail** and **Google Calendar** widgets
    # Inside Docker container (run as UID 1000 so the app can update the file)
    docker exec -it -u 1000 faro node scripts/faro-auth.mjs google --account personale
    ```
+
    If running on a headless server via SSH or Docker where `http://127.0.0.1:...` cannot load in your local browser, copy the full redirect URL from your browser's address bar and paste it into the terminal prompt.
 
 Tokens are stored with `0600` permissions in `config/faro-oauth.json` and refreshed automatically.
