@@ -5,9 +5,8 @@ on:
   schedule:
     - cron: '2 */12 * * *'
   push:
-    paths: [
-      '/public/locales/en/**',
-    ]
+    paths:
+      - '/public/locales/en/**'
     branches: [ dev ]
 
 permissions:
@@ -17,6 +16,7 @@ permissions:
 jobs:
   synchronize-with-crowdin:
     name: Crowdin Sync
+    if: github.repository == 'gethomepage/homepage'
     runs-on: ubuntu-latest
 
     steps:

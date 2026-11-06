@@ -149,7 +149,11 @@ function startLoopbackServer(port, expectedState) {
     const server = http.createServer((req, res) => {
       try {
         const reqUrl = new URL(req.url || "/", "http://127.0.0.1");
-        if (reqUrl.pathname !== "/oauth2callback" && !reqUrl.searchParams.has("code") && !reqUrl.searchParams.has("error")) {
+        if (
+          reqUrl.pathname !== "/oauth2callback" &&
+          !reqUrl.searchParams.has("code") &&
+          !reqUrl.searchParams.has("error")
+        ) {
           res.writeHead(404, { "Content-Type": "text/plain; charset=utf-8" });
           res.end("Not found");
           return;
@@ -179,7 +183,9 @@ function startLoopbackServer(port, expectedState) {
         }
 
         res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
-        res.end("<h2>Account Google collegato con successo a Faro!</h2><p>Puoi chiudere questa scheda e tornare al terminale.</p>");
+        res.end(
+          "<h2>Account Google collegato con successo a Faro!</h2><p>Puoi chiudere questa scheda e tornare al terminale.</p>",
+        );
         resolveCode(code);
       } catch (err) {
         rejectCode(err);
@@ -213,7 +219,12 @@ async function runGoogleFlow(args, configDir) {
     const account = await promptIfMissing(rl, args.account, "Nome account (usato in services.yaml)", "personale");
     const existing = (await readStore(configDir)).accounts[account] ?? {};
 
-    const clientId = await promptIfMissing(rl, args["client-id"], "Google OAuth Client ID (Desktop app)", existing.clientId || "");
+    const clientId = await promptIfMissing(
+      rl,
+      args["client-id"],
+      "Google OAuth Client ID (Desktop app)",
+      existing.clientId || "",
+    );
     if (!clientId) {
       throw new Error("Client ID obbligatorio.");
     }
@@ -247,7 +258,9 @@ async function runGoogleFlow(args, configDir) {
     console.log("\n1) Apri questo URL nel browser e autorizza l'account Google:\n");
     console.log(`   ${authUrl.toString()}\n`);
     console.log("2) Se sei in locale, il browser completera' il collegamento in automatico.");
-    console.log("   Se sei via SSH/Docker (e 127.0.0.1 non carica), copia l'URL completo dalla barra indirizzi e incollalo qui sotto:\n");
+    console.log(
+      "   Se sei via SSH/Docker (e 127.0.0.1 non carica), copia l'URL completo dalla barra indirizzi e incollalo qui sotto:\n",
+    );
 
     const abortController = new AbortController();
     const manualPromise = rl
@@ -285,12 +298,16 @@ async function runGoogleFlow(args, configDir) {
     const tokenData = await tokenRes.json();
 
     if (!tokenRes.ok || !tokenData.access_token) {
-      throw new Error(`Scambio token Google fallito: ${tokenData.error_description || tokenData.error || tokenRes.status}`);
+      throw new Error(
+        `Scambio token Google fallito: ${tokenData.error_description || tokenData.error || tokenRes.status}`,
+      );
     }
 
     const refreshToken = tokenData.refresh_token || existing.refreshToken;
     if (!refreshToken) {
-      throw new Error("Google non ha restituito un refresh_token. Riprova rimuovendo prima l'accesso dell'app da myaccount.google.com/permissions.");
+      throw new Error(
+        "Google non ha restituito un refresh_token. Riprova rimuovendo prima l'accesso dell'app da myaccount.google.com/permissions.",
+      );
     }
 
     let email = null;
@@ -337,11 +354,21 @@ async function runMicrosoftFlow(args, configDir) {
   try {
     account = await promptIfMissing(rl, args.account, "Nome account (usato in services.yaml)", "polimi");
     existing = (await readStore(configDir)).accounts[account] ?? {};
-    clientId = await promptIfMissing(rl, args["client-id"], "Microsoft Entra Application (client) ID", existing.clientId || "");
+    clientId = await promptIfMissing(
+      rl,
+      args["client-id"],
+      "Microsoft Entra Application (client) ID",
+      existing.clientId || "",
+    );
     if (!clientId) {
       throw new Error("Client ID obbligatorio.");
     }
-    tenant = await promptIfMissing(rl, args.tenant, "Tenant Microsoft (common, consumers, organizations o tenant ID)", existing.tenant || "common");
+    tenant = await promptIfMissing(
+      rl,
+      args.tenant,
+      "Tenant Microsoft (common, consumers, organizations o tenant ID)",
+      existing.tenant || "common",
+    );
   } finally {
     rl.close();
   }
@@ -361,7 +388,9 @@ async function runMicrosoftFlow(args, configDir) {
   const deviceData = await deviceRes.json();
 
   if (!deviceRes.ok || !deviceData.device_code) {
-    throw new Error(`Richiesta device code fallita: ${deviceData.error_description || deviceData.error || deviceRes.status}`);
+    throw new Error(
+      `Richiesta device code fallita: ${deviceData.error_description || deviceData.error || deviceRes.status}`,
+    );
   }
 
   console.log(`\n${deviceData.message}\n`);
@@ -403,7 +432,9 @@ async function runMicrosoftFlow(args, configDir) {
     }
 
     const hint =
-      body.error === "consent_required" || String(body.error_description || "").includes("AADSTS65001") || String(body.error_description || "").includes("AADSTS90094")
+      body.error === "consent_required" ||
+      String(body.error_description || "").includes("AADSTS65001") ||
+      String(body.error_description || "").includes("AADSTS90094")
         ? "\nNota: il tenant universitario potrebbe richiedere l'approvazione dell'amministratore IT per le app di terze parti."
         : "";
     throw new Error(`Autenticazione Microsoft fallita: ${body.error_description || body.error}${hint}`);
@@ -453,7 +484,9 @@ async function listAccounts(configDir) {
   }
   console.log(`Account collegati in ${join(configDir, STORE_FILENAME)}:`);
   for (const [key, acc] of entries) {
-    console.log(`  - ${key}: provider=${acc.provider}${acc.email ? ` (${acc.email})` : ""} aggiornato=${acc.updatedAt || "?"}`);
+    console.log(
+      `  - ${key}: provider=${acc.provider}${acc.email ? ` (${acc.email})` : ""} aggiornato=${acc.updatedAt || "?"}`,
+    );
   }
 }
 

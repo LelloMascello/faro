@@ -31,6 +31,7 @@ jobs:
       # Run Vitest directly so `--shard` is parsed as an option
       - run: pnpm -s exec vitest run --coverage --shard ${{ matrix.shard }}/4 --pool forks
       - name: Upload coverage reports to Codecov
+        if: github.repository == 'gethomepage/homepage'
         uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}

@@ -70,10 +70,7 @@ describe("widgets/googlecalendar/component", () => {
     fireEvent.click(checkbox);
 
     await waitFor(() => {
-      expect(mutate).toHaveBeenCalledWith(
-        expect.objectContaining({ tasks: [] }),
-        { revalidate: false },
-      );
+      expect(mutate).toHaveBeenCalledWith(expect.objectContaining({ tasks: [] }), { revalidate: false });
       expect(global.fetch).toHaveBeenCalledTimes(1);
     });
 

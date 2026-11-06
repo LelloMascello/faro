@@ -57,30 +57,28 @@ describe("widgets/outlook/proxy", () => {
       focusedOnly: true,
     });
 
-    graphFetch
-      .mockResolvedValueOnce({ unreadItemCount: 2 })
-      .mockResolvedValueOnce({
-        value: [
-          {
-            id: "o1",
-            subject: "Aggiornamento calendario esami",
-            from: { emailAddress: { name: "Segreteria studenti", address: "segreteria@polimi.it" } },
-            receivedDateTime: "2026-11-05T10:05:00Z",
-            bodyPreview: "Sono disponibili le nuove date…",
-            isRead: false,
-            webLink: "https://outlook.office.com/owa/?ItemID=o1",
-          },
-          {
-            id: "o2",
-            subject: "Revisione",
-            from: { emailAddress: { name: "", address: "gruppo@polimi.it" } },
-            receivedDateTime: "2026-11-05T07:15:00Z",
-            bodyPreview: "Ho caricato la nuova versione",
-            isRead: true,
-            webLink: "",
-          },
-        ],
-      });
+    graphFetch.mockResolvedValueOnce({ unreadItemCount: 2 }).mockResolvedValueOnce({
+      value: [
+        {
+          id: "o1",
+          subject: "Aggiornamento calendario esami",
+          from: { emailAddress: { name: "Segreteria studenti", address: "segreteria@polimi.it" } },
+          receivedDateTime: "2026-11-05T10:05:00Z",
+          bodyPreview: "Sono disponibili le nuove date…",
+          isRead: false,
+          webLink: "https://outlook.office.com/owa/?ItemID=o1",
+        },
+        {
+          id: "o2",
+          subject: "Revisione",
+          from: { emailAddress: { name: "", address: "gruppo@polimi.it" } },
+          receivedDateTime: "2026-11-05T07:15:00Z",
+          bodyPreview: "Ho caricato la nuova versione",
+          isRead: true,
+          webLink: "",
+        },
+      ],
+    });
 
     const res = createMockRes();
     await outlookProxyHandler(req, res);

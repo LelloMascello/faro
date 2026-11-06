@@ -91,10 +91,7 @@ export default async function outlookProxyHandler(req, res) {
     });
 
     if (focusedOnly) {
-      msgParams.set(
-        "$filter",
-        "inferenceClassification eq 'focused' and receivedDateTime ge 1970-01-01T00:00:00Z",
-      );
+      msgParams.set("$filter", "inferenceClassification eq 'focused' and receivedDateTime ge 1970-01-01T00:00:00Z");
     }
 
     const [folderInfo, messagesData] = await Promise.all([
@@ -108,7 +105,9 @@ export default async function outlookProxyHandler(req, res) {
       id: msg.id,
       from: formatOutlookSender(msg.from),
       subject: decodeHtmlEntities(msg.subject || "").trim() || "(Nessun oggetto)",
-      snippet: decodeHtmlEntities(msg.bodyPreview || "").replace(/\s+/g, " ").trim(),
+      snippet: decodeHtmlEntities(msg.bodyPreview || "")
+        .replace(/\s+/g, " ")
+        .trim(),
       date: msg.receivedDateTime || null,
       unread: msg.isRead === false,
       link: msg.webLink || "https://outlook.office.com/mail/",

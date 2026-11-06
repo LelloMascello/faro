@@ -146,7 +146,9 @@ export default async function gmailProxyHandler(req, res) {
       const headers = msg?.payload?.headers ?? [];
       const from = parseSenderHeader(getHeader(headers, "From")) || "(Sconosciuto)";
       const subject = decodeHtmlEntities(getHeader(headers, "Subject")).trim() || "(Nessun oggetto)";
-      const snippet = decodeHtmlEntities(msg?.snippet || "").replace(/\s+/g, " ").trim();
+      const snippet = decodeHtmlEntities(msg?.snippet || "")
+        .replace(/\s+/g, " ")
+        .trim();
       const internalMs = Number(msg?.internalDate);
       const dateHeader = getHeader(headers, "Date");
       let isoDate = null;

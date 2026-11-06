@@ -19,7 +19,7 @@ permissions:
 jobs:
   update_release_draft:
     name: Update Release Draft
-    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    if: github.repository == 'gethomepage/homepage' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
     permissions:
       contents: write
       pull-requests: read

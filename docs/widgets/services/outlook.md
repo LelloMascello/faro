@@ -23,8 +23,8 @@ Shows the unread inbox count and previews of the latest messages from an Outlook
 ## OAuth2 Setup (Microsoft Entra ID)
 
 1. Open the [Microsoft Entra admin center](https://entra.microsoft.com/) (a free personal Microsoft account works) and go to **Identity → Applications → App registrations → New registration**.
-2. Set a name (e.g. `Faro Dashboard`) and choose **Accounts in any organizational directory (Any Microsoft Entra ID tenant - Multitenant) and personal Microsoft accounts** so both university and personal accounts can sign in. Leave *Redirect URI* blank.
-3. Copy the **Application (client) ID** from the app's *Overview* page.
+2. Set a name (e.g. `Faro Dashboard`) and choose **Accounts in any organizational directory (Any Microsoft Entra ID tenant - Multitenant) and personal Microsoft accounts** so both university and personal accounts can sign in. Leave _Redirect URI_ blank.
+3. Copy the **Application (client) ID** from the app's _Overview_ page.
 4. Under **Authentication → Advanced settings**, set **Allow public client flows** to **Yes** and click **Save** (required for Device Code Flow).
 5. Under **API permissions → Add a permission → Microsoft Graph → Delegated permissions**, ensure `User.Read`, `Mail.Read`, and `offline_access` are added.
 6. Run the one-time CLI linker:

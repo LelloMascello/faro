@@ -1,8 +1,8 @@
-import { useTranslation } from "next-i18next/pages";
 import CardBadge from "components/faro/card-badge";
 import CardFooterLink from "components/faro/card-footer-link";
 import MailList from "components/faro/mail-list";
 import Container from "components/services/widget/container";
+import { useTranslation } from "next-i18next/pages";
 
 import useWidgetAPI from "utils/proxy/use-widget-api";
 

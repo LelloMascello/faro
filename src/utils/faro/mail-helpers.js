@@ -38,7 +38,10 @@ export function parseSenderHeader(rawFrom) {
   const trimmed = rawFrom.trim();
   const angleMatch = trimmed.match(/^(.*?)\s*<([^>]+)>$/);
   if (angleMatch) {
-    const displayName = angleMatch[1].trim().replace(/^["']|["']$/g, "").trim();
+    const displayName = angleMatch[1]
+      .trim()
+      .replace(/^["']|["']$/g, "")
+      .trim();
     if (displayName) {
       return decodeHtmlEntities(displayName);
     }

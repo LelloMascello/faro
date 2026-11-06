@@ -71,7 +71,9 @@ describe("utils/faro/oauth/microsoft", () => {
 
   it("resolves relative Graph API paths and handles invalid_grant", async () => {
     global.fetch
-      .mockResolvedValueOnce(new Response(JSON.stringify({ access_token: "ms-at-1", expires_in: 3600 }), { status: 200 }))
+      .mockResolvedValueOnce(
+        new Response(JSON.stringify({ access_token: "ms-at-1", expires_in: 3600 }), { status: 200 }),
+      )
       .mockResolvedValueOnce(new Response(JSON.stringify({ unreadItemCount: 2 }), { status: 200 }));
 
     const inbox = await graphFetch("polimi", "/me/mailFolders/inbox", {}, { configDir: tempDir });
@@ -79,9 +81,7 @@ describe("utils/faro/oauth/microsoft", () => {
     expect(global.fetch.mock.calls[1][0]).toBe("https://graph.microsoft.com/v1.0/me/mailFolders/inbox");
 
     clearMicrosoftTokenCache();
-    global.fetch.mockResolvedValueOnce(
-      new Response(JSON.stringify({ error: "invalid_grant" }), { status: 400 }),
-    );
+    global.fetch.mockResolvedValueOnce(new Response(JSON.stringify({ error: "invalid_grant" }), { status: 400 }));
 
     await expect(getMicrosoftAccessToken("polimi", { configDir: tempDir })).rejects.toMatchObject({
       status: 401,

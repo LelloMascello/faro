@@ -31,7 +31,7 @@ One Google OAuth setup covers both the **Gmail** and **Google Calendar** widgets
    - **Google Tasks API**
 3. Under **Google Auth Platform / OAuth consent screen**:
    - Choose **External** user type and fill the required app name and email fields.
-   - Publish the app (**Publish App → In production**). *Important*: apps left in *Testing* expire refresh tokens after **7 days**. Personal unverified apps do not require Google verification — click *Advanced → Go to Faro (unsafe)* once during login.
+   - Publish the app (**Publish App → In production**). _Important_: apps left in _Testing_ expire refresh tokens after **7 days**. Personal unverified apps do not require Google verification — click _Advanced → Go to Faro (unsafe)_ once during login.
 4. Under **Credentials → Create Credentials → OAuth client ID**:
    - Select **Desktop app** and copy the **Client ID** and **Client Secret**.
 5. Run the one-time CLI linker:

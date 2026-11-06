@@ -68,7 +68,13 @@ describe("widgets/googlecalendar/proxy", () => {
       // calendarList
       .mockResolvedValueOnce({
         items: [
-          { id: "uni@group.calendar.google.com", selected: true, backgroundColor: "#3b82f6", primary: true, timeZone: zone },
+          {
+            id: "uni@group.calendar.google.com",
+            selected: true,
+            backgroundColor: "#3b82f6",
+            primary: true,
+            timeZone: zone,
+          },
           { id: "team@group.calendar.google.com", selected: true, backgroundColor: "#22c55e" },
           { id: "hidden@group.calendar.google.com", selected: false, backgroundColor: "#ef4444" },
         ],

@@ -1,17 +1,16 @@
 name: Docker CI
 
 on:
-  schedule:
-    - cron: '20 0 * * *'
+  workflow_dispatch:
   push:
     branches:
       - main
       - feature/**
       - fix/**
       - dev
-    tags: [ 'v*.*.*' ]
+    tags: ["v*.*.*"]
   pull_request:
-    branches: [ "dev" ]
+    branches: ["dev", "main"]
   merge_group:
 
 env:
@@ -20,12 +19,9 @@ env:
 permissions: {}
 
 jobs:
-
-
   build:
     name: Docker Build & Push
-    if: github.repository == 'gethomepage/homepage'
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
@@ -39,14 +35,11 @@ jobs:
         uses: docker/metadata-action@dc802804100637a589fabce1cb79ff13a1411302 # v6
         with:
           images: |
-            ${{ env.IMAGE_NAME }}
             ghcr.io/${{ env.IMAGE_NAME }}
           tags: |
-            # Default tags
-            type=schedule,pattern=nightly
             type=ref,event=branch
             type=ref,event=tag
-            # Versioning tags
+            type=raw,value=latest,enable=${{ github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/main' }}
             type=semver,pattern=v{{version}}
             type=semver,pattern=v{{major}}.{{minor}}
             type=semver,pattern=v{{major}}
@@ -71,10 +64,10 @@ jobs:
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v6
         with:
           node-version: 24
-          cache: 'pnpm'
+          cache: "pnpm"
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
       - name: Build app
         run: |
@@ -83,20 +76,13 @@ jobs:
           NEXT_PUBLIC_REVISION="${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.revision'] }}" \
           pnpm run build
 
-      - name: Log into registry ${{ env.REGISTRY }}
+      - name: Log into registry ghcr.io
         if: github.event_name != 'pull_request'
         uses: docker/login-action@81c6f93d4bc991e510b342a00b419b3bb4efc5c6 # v4
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Login to Docker Hub
-        if: github.event_name != 'pull_request'
-        uses: docker/login-action@81c6f93d4bc991e510b342a00b419b3bb4efc5c6 # v4
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Setup QEMU
         uses: docker/setup-qemu-action@99012661954931238ded8c8b007157a8430204e1 # v4.4.0

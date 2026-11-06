@@ -1,10 +1,10 @@
 import classNames from "classnames";
-import { DateTime } from "luxon";
-import { useTranslation } from "next-i18next/pages";
-import { useContext, useState } from "react";
 import CardBadge from "components/faro/card-badge";
 import CardFooterLink from "components/faro/card-footer-link";
 import Container from "components/services/widget/container";
+import { DateTime } from "luxon";
+import { useTranslation } from "next-i18next/pages";
+import { useContext, useState } from "react";
 import { SettingsContext } from "utils/contexts/settings";
 
 import { getURLSearchParams } from "utils/proxy/api-helpers";
@@ -195,12 +195,7 @@ export default function Component({ service }) {
           ) : (
             <div className="w-full border-t border-theme-200/60 dark:border-white/10 divide-y divide-theme-200/60 dark:divide-white/10">
               {events.map((event) => (
-                <EventRow
-                  key={event.id}
-                  event={event}
-                  target={target}
-                  allDayLabel={t("googlecalendar.allDay")}
-                />
+                <EventRow key={event.id} event={event} target={target} allDayLabel={t("googlecalendar.allDay")} />
               ))}
               {tasks.map((task) => (
                 <TaskRow
