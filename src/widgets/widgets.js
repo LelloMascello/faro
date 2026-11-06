@@ -47,6 +47,8 @@ import gitea from "./gitea/widget";
 import gitlab from "./gitlab/widget";
 import glances from "./glances/widget";
 import gluetun from "./gluetun/widget";
+import gmail from "./gmail/widget";
+import googlecalendar from "./googlecalendar/widget";
 import gotify from "./gotify/widget";
 import grafana from "./grafana/widget";
 import hdhomerun from "./hdhomerun/widget";
@@ -96,6 +98,7 @@ import opendtu from "./opendtu/widget";
 import openmediavault from "./openmediavault/widget";
 import openwrt from "./openwrt/widget";
 import opnsense from "./opnsense/widget";
+import outlook from "./outlook/widget";
 import pangolin from "./pangolin/widget";
 import paperlessngx from "./paperlessngx/widget";
 import peanut from "./peanut/widget";
@@ -211,6 +214,8 @@ const widgets = {
   gitlab,
   glances,
   gluetun,
+  gmail,
+  googlecalendar,
   gotify,
   grafana,
   hdhomerun,
@@ -264,6 +269,7 @@ const widgets = {
   overseerr: seerr,
   openmediavault,
   openwrt,
+  outlook,
   paperlessngx,
   pangolin,
   peanut,

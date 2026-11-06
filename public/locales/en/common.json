@@ -1305,5 +1305,20 @@
     },
     "feed": {
         "noItems": "No items"
+    },
+    "faromail": {
+        "unread_one": "{{count}} unread",
+        "unread_other": "{{count}} unread",
+        "openMail": "Open mail",
+        "noMail": "No messages",
+        "yesterday": "Yesterday"
+    },
+    "googlecalendar": {
+        "openCalendar": "Open calendar",
+        "noEvents": "No events or tasks for today",
+        "allDay": "All day",
+        "dueToday": "Due today",
+        "overdue": "Overdue",
+        "completeTask": "Mark '{{title}}' as completed"
     }
 }

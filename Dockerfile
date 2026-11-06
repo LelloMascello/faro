@@ -48,6 +48,7 @@ COPY --link --chmod=755 docker-entrypoint.sh /usr/local/bin/
 # Copy only necessary files from the build stage
 COPY --link --from=builder --chown=1000:1000 /app/.next/standalone/ ./
 COPY --link --from=builder --chown=1000:1000 /app/.next/static/ ./.next/static
+COPY --link --chown=1000:1000 scripts/faro-auth.mjs ./scripts/
 
 RUN apk add --no-cache su-exec iputils-ping shadow
 

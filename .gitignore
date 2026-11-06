@@ -42,6 +42,7 @@ next-env.d.ts
 
 # homepage
 /config
+*faro-oauth*.json
 
 # IDEs
 /.idea/

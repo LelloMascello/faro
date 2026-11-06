@@ -81,6 +81,8 @@ nav:
           - widgets/services/gitlab.md
           - widgets/services/glances.md
           - widgets/services/gluetun.md
+          - widgets/services/gmail.md
+          - widgets/services/googlecalendar.md
           - widgets/services/gotify.md
           - widgets/services/grafana.md
           - widgets/services/hdhomerun.md
@@ -131,6 +133,7 @@ nav:
           - widgets/services/openmediavault.md
           - widgets/services/opnsense.md
           - widgets/services/openwrt.md
+          - widgets/services/outlook.md
           - widgets/services/pangolin.md
           - widgets/services/paperlessngx.md
           - widgets/services/peanut.md
